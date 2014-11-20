@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Haftbefehl quiz</title>
   <!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
-  <link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
-
+  <link rel="stylesheet" media="screen" href="normalize.css">
   <style>
     /* apply a natural box layout model to all elements http://paulirish.com/2012/box-sizing-border-box-ftw/ */
     *, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
@@ -17,24 +16,136 @@
       font-weight: 300;
     }
 
-    #quiz {
+    .quiz {
+      display: none;
+    }
+
+    #lyrics {
       display: none;
     }
 
   </style>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script src="jquery-2.1.1.min.js"></script>
+
   <script>
     $(document).ready(function() {
-      var requiredWins = 3;
+      var currentQuiz = 1;
+      var numberOfQuiz = 4;
+      var score = 0;
+
+      $( "#question-" + currentQuiz).show();
+
+      /*
+       * single question quiz
+       */
+      $( "#question-1 button" ).click(function() {
+
+        // check answer
+        if ($(this).attr("value") == "2") {
+          score++;
+        }
+        nextQuiz();
+      });
+      /*
+       * multiple question quiz
+       */
+      $( "#question-2 .quiz-submit" ).click(function() {
+        // check answer
+        if ($(this).attr("value") == "2") {
+          alert("correct alda");
+          score++;
+        }
+
+        nextQuiz();
+      });
+      /*
+       * fill the gap
+       */
+      $( "#question-3 .quiz-submit" ).click(function() {
+        // check answer
+        if ($(this).attr("value") == "2") {
+          alert("correct alda");
+          score++;
+        }
+
+        nextQuiz();
+      });
+      /*
+       * free answer
+       */
+      $( "#question-4 .quiz-submit" ).click(function() {
+        // check answer
+        if ($(this).attr("value") == "2") {
+          alert("correct alda");
+          score++;
+        }
+
+        nextQuiz();
+      });
+
+
+      function nextQuiz() {
+        $( "#question-" + currentQuiz).hide();
+        currentQuiz++;
+        if (currentQuiz > numberOfQuiz) {
+          // put out answer
+          $( "#result").show();
+          var text = score > 0 ? "du bist ein chegger" : "geh nach hause";
+          $( "#result p").text(text);
+
+        } else {
+          $( "#question-" + currentQuiz).show();
+        }
+        
+      }
 
     });
   </script>
 </head>
 <body>
-ok hier kommt quiz
-<div>lyrics</div>
+<div id="content">
 
-<div id="quiz">
+<div id="question-1" class="quiz">
+    <p>How much is 2+2?</p>  
+    
+    <button class="answer-submit" value="1">1</button>
+    <button class="answer-submit" value="2">2</button>
+    <button class="answer-submit" value="3">3</button>
+    <button class="answer-submit" value="4">4</button>
+</div>
+
+<div id="question-2" class="quiz">
+    <p>Which of these are roots of the equation x²+x-6 = 0?</p>
+    <label><input type="checkbox" name="checkbox" value="1">Text</label>
+    <label><input type="checkbox" name="checkbox" value="2">Text</label>
+    <label><input type="checkbox" name="checkbox" value="3">Text</label>
+    <label><input type="checkbox" name="checkbox" value="4">Text</label>
+    <label><input type="checkbox" name="checkbox" value="5">Text</label>
+    <label><input type="checkbox" name="checkbox" value="6">Text</label>
+    <button class="quiz-submit">Nächste Frage</button>
+</div>
+
+<div id="question-3" class="quiz">
+    <p>füll die lücke</p>
+    <pre>
+Und du liegst danach dort tot rum, Straßenmorde, Tagesordnung
+Amina kodum, es geht um schwarze <input type="text" class="quiz-answerbox"/> mit den Magnum Motors
+</pre>
+    <button class="quiz-submit">Nächste Frage</button>
+</div>
+
+<div id="question-4" class="quiz">
+    <p>Was ist dein lieblings lied.</p>
+    <p><textarea class="quiz-answerbox" cols="70"></textarea></p>
+    <button class="quiz-submit">Auswertung</button>
+</div>
+
+<div id="result" class="quiz">
+    <p>du bist ein huso</p>
+    please post your result on facebook thx
+</div>
+
+<div id="lyrics">
 Chabos wissen, wer der Babo ist
 Hafti Abi ist der, der im Lambo und Ferrari sitzt
 Saudi Arabi money rich
@@ -80,15 +191,11 @@ Haftbefehl schiebt jetzt gerade seinen Cock rein
 Ich komme rein und frag: Ist noch ein Loch frei?
 Rack City, Bitch, Rack Rack City, Bitch
 Das ist wie der Stuhlgang von Breivik - Killershit
-
 </div>
-
-
-
-
 
   <footer>
     <p>Copyright 2011 yannick weiss</p>
   </footer>
+</div>
 </body>
 </html>
