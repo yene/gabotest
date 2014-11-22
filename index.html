@@ -32,54 +32,14 @@
       var currentQuiz = 1;
       var numberOfQuiz = 4;
       var score = 0;
+      var requiredScore = 8;
 
       $( "#question-" + currentQuiz).show();
 
-      /*
-       * single question quiz
-       */
-      $( "#question-1 button" ).click(function() {
-
-        // check answer
-        if ($(this).attr("value") == "2") {
+      $( ".quiz-question button" ).click(function() {
+        if ($(this).attr("data-question") == $(this).parent().attr("data-answer")) {
           score++;
         }
-        nextQuiz();
-      });
-      /*
-       * multiple question quiz
-       */
-      $( "#question-2 .quiz-submit" ).click(function() {
-        // check answer
-        if ($(this).attr("value") == "2") {
-          alert("correct alda");
-          score++;
-        }
-
-        nextQuiz();
-      });
-      /*
-       * fill the gap
-       */
-      $( "#question-3 .quiz-submit" ).click(function() {
-        // check answer
-        if ($(this).attr("value") == "2") {
-          alert("correct alda");
-          score++;
-        }
-
-        nextQuiz();
-      });
-      /*
-       * free answer
-       */
-      $( "#question-4 .quiz-submit" ).click(function() {
-        // check answer
-        if ($(this).attr("value") == "2") {
-          alert("correct alda");
-          score++;
-        }
-
         nextQuiz();
       });
 
@@ -87,111 +47,110 @@
       function nextQuiz() {
         $( "#question-" + currentQuiz).hide();
         currentQuiz++;
-        if (currentQuiz > numberOfQuiz) {
+        
+        if($( "#question-" + currentQuiz).length) { // check if there is a next question
+          $( "#question-" + currentQuiz).show();
+        } else {
           // put out answer
           $( "#result").show();
-          var text = score > 0 ? "du bist ein chegger" : "geh nach hause";
-          $( "#result p").text(text);
-
-        } else {
-          $( "#question-" + currentQuiz).show();
+          
+          if (score > requiredScore) {
+            $( "#result #winner").show();
+            $( "#result #loser").hide();
+          } else {
+            $( "#result #winner").hide();
+            $( "#result #loser").show();
+          }
         }
-        
       }
-
     });
   </script>
 </head>
 <body>
 <div id="content">
+  <div id="quiz">
+    <div id="question-1" class="quiz quiz-question" data-answer="3">
+        <p>Wenn nicht mit Rap, …</p>  
+        <button class="answer-submit" data-question="1">...dann geh ich zur Uni</button>
+        <button class="answer-submit" data-question="2">… dann mit Techno</button>
+        <button class="answer-submit" data-question="3">… dann mit der Pumpgun</button>
+        <button class="answer-submit" data-question="4">… dann mit der Pumpgun</button>
+    </div>
+    <div id="question-2" class="quiz quiz-question" data-answer="2">
+        <p>Haftbefehls Bruder heisst:</p>  
+        <button class="answer-submit" data-question="1">Abdi</button>
+        <button class="answer-submit" data-question="2">Capo</button>
+        <button class="answer-submit" data-question="3">Veysel</button>
+        <button class="answer-submit" data-question="4">Veysel</button>
+    </div>
+    <div id="question-3" class="quiz quiz-question" data-answer="2">
+        <p>In Haftbefehls Welt zählt nur…</p>  
+        <button class="answer-submit" data-question="1">Gianni Versace</button>
+        <button class="answer-submit" data-question="2">Donatella Versace</button>
+        <button class="answer-submit" data-question="3">H&M</button>
+        <button class="answer-submit" data-question="4">H&M</button>
+    </div>
+    <div id="question-4" class="quiz quiz-question" data-answer="2">
+        <p>Haftbefehl kommt aus:</p>  
+        <button class="answer-submit" data-question="1">Berlin</button>
+        <button class="answer-submit" data-question="2">Offenbach</button>
+        <button class="answer-submit" data-question="3">Bronx</button>
+        <button class="answer-submit" data-question="4">Bronx</button>
+    </div>
+    <div id="question-5" class="quiz quiz-question" data-answer="1">
+        <p>Welche Sprache spricht Haftbefehl:</p>  
+        <button class="answer-submit" data-question="1">Arabisch</button>
+        <button class="answer-submit" data-question="2">Serbisch</button>
+        <button class="answer-submit" data-question="3">Kanackis</button>
+        <button class="answer-submit" data-question="4">Kanackis</button>
+    </div>
+    <div id="question-6" class="quiz quiz-question" data-answer="2">
+        <p>Mit wem hat Haftbefehl noch kein Feature gemacht:</p>  
+        <button class="answer-submit" data-question="1">Sido</button>
+        <button class="answer-submit" data-question="2">Cro</button>
+        <button class="answer-submit" data-question="3">Bushido</button>
+        <button class="answer-submit" data-question="4">Bushido</button>
+    </div>
+    <div id="question-7" class="quiz quiz-question" data-answer="2">
+        <p>Haftbefehl führte vor seiner Rapkariere…</p>  
+        <button class="answer-submit" data-question="1">…eine Bar</button>
+        <button class="answer-submit" data-question="2">…einen Coffeeshop</button>
+        <button class="answer-submit" data-question="3">…ein Wettbüro</button>
+        <button class="answer-submit" data-question="4">…ein Wettbüro</button>
+    </div>
+    <div id="question-8" class="quiz quiz-question" data-answer="2">
+        <p>Wann erschien Haftis erstes Album:</p>  
+        <button class="answer-submit" data-question="1">2006</button>
+        <button class="answer-submit" data-question="2">2009</button>
+        <button class="answer-submit" data-question="3">2010</button>
+        <button class="answer-submit" data-question="4">2010</button>
+    </div>
+    <div id="question-9" class="quiz quiz-question" data-answer="1">
+        <p>Welcher Rapper ist das Vorbild von Haftbefehl</p>  
+        <button class="answer-submit" data-question="1">Notorious B.I.G.</button>
+        <button class="answer-submit" data-question="2">2Pac</button>
+        <button class="answer-submit" data-question="3">Moneyboy</button>
+        <button class="answer-submit" data-question="4">Moneyboy</button>
+    </div>
+    <div id="question-10" class="quiz quiz-question" data-answer="1">
+        <p>Was ist ein Azzlack Stereotyp?</p>  
+        <button class="answer-submit" data-question="1">Er macht Schnapp mit Drugs</button>
+        <button class="answer-submit" data-question="2">Eine Marke für Stereo Sound Anlagen</button>
+        <button class="answer-submit" data-question="3">Ein Lackhersteller aus Österreich</button>
+        <button class="answer-submit" data-question="4">Ein Lackhersteller aus Österreich</button>
+    </div>
 
-<div id="question-1" class="quiz">
-    <p>How much is 2+2?</p>  
-    
-    <button class="answer-submit" value="1">1</button>
-    <button class="answer-submit" value="2">2</button>
-    <button class="answer-submit" value="3">3</button>
-    <button class="answer-submit" value="4">4</button>
-</div>
 
-<div id="question-2" class="quiz">
-    <p>Which of these are roots of the equation x²+x-6 = 0?</p>
-    <label><input type="checkbox" name="checkbox" value="1">Text</label>
-    <label><input type="checkbox" name="checkbox" value="2">Text</label>
-    <label><input type="checkbox" name="checkbox" value="3">Text</label>
-    <label><input type="checkbox" name="checkbox" value="4">Text</label>
-    <label><input type="checkbox" name="checkbox" value="5">Text</label>
-    <label><input type="checkbox" name="checkbox" value="6">Text</label>
-    <button class="quiz-submit">Nächste Frage</button>
-</div>
-
-<div id="question-3" class="quiz">
-    <p>füll die lücke</p>
-    <pre>
-Und du liegst danach dort tot rum, Straßenmorde, Tagesordnung
-Amina kodum, es geht um schwarze <input type="text" class="quiz-answerbox"/> mit den Magnum Motors
-</pre>
-    <button class="quiz-submit">Nächste Frage</button>
-</div>
-
-<div id="question-4" class="quiz">
-    <p>Was ist dein lieblings lied.</p>
-    <p><textarea class="quiz-answerbox" cols="70"></textarea></p>
-    <button class="quiz-submit">Auswertung</button>
-</div>
-
-<div id="result" class="quiz">
-    <p>du bist ein huso</p>
-    please post your result on facebook thx
-</div>
-
-<div id="lyrics">
-Chabos wissen, wer der Babo ist
-Hafti Abi ist der, der im Lambo und Ferrari sitzt
-Saudi Arabi money rich
-Wissen, wer der Babo ist
-Attention, mach bloß keine Harakets
-Bevor ich komm' und dir deine Nase brech'
-Wissen, wer der Babo ist
-Immer noch derselbe Chabo, Bitch
-Den du am Bahnhof triffst, wie er grade Nasen snifft
-Wissen, wer der Babo ist
-W-W-Wissen, wer der Babo ist
-
-Tokat, Kopf ab - Mortal Kombat
-Vollkontakt a la Ong-Bak, Komm ran
-Opfer, du bist Honda, ich Sagat
-Nicht link von hinten, ich hau dich frontal, sakat
-Dein Yokuzuna-Sumo ficke ich mit 'nem Pushkick
-Was los, du Hurensohn? Komm wieder, wenn du Luft kriegst
-Pussy, muck bloß nicht uff hier, du Rudi
-Nix mit Hollywood - Frankfurt, Brudi
-Du kannst Wing Chun und Kung Fu wie Bruce Lee
-Kampfstil Tunceli, Altmış iki kurdî
-Magnums und Uzis durchlöcherten den Tatort, oğlum
-Und du liegst danach dort tot rum, Straßenmorde, Tagesordnung
-Amina kodum, es geht um schwarze Porsches mit den Magnum Motors
-Vollgas, Monte Carlo, Touren à la Formula Uno
-Hafti Abi, Baby, Straßenstar international
-Biji, biji Kurdistan, ich mach's auf die Babo-Art
-
-Du weißt, dass ich Babo bin, weil ich deine Mutter fick'
-Du bist wie mein Schwanz beim Wichsen - Ich spuck auf dich
-Und sie ducken sich vor Pumpgun-Patronen
-Denn ich mache sie zur Schnecke wie ein Transenchirurg
-Versorg Junkies mit Koks, fick' Collien
-Und trainier' nur Muskeln, die man in der Disco sieht
-Der deutsche Mr. T, Gerichtstermin, Anklagebank
-Weil sich im Wandschrank das Hanf und 'ne Pumpgun befand
-Verteil' an Samstagen Schwanz oder ganz harte Punch's
-Und greif deutsche Rapper mit Glaspfandflaschen an
-Ey, ey, ich mach deine Kinder zu Nutten
-Ohne dabei mit der Wimper zu zucken
-Haftbefehl schiebt jetzt gerade seinen Cock rein
-Ich komme rein und frag: Ist noch ein Loch frei?
-Rack City, Bitch, Rack Rack City, Bitch
-Das ist wie der Stuhlgang von Breivik - Killershit
-</div>
+    <div id="result" class="quiz">
+        <div id="winner">
+          <p>du bist ein chabo</p>
+        </div>
+        <div id="loser">
+          <p>du bist kein chabo</p>
+          <p>please post on facebook</p>
+        </div>
+    </div>
+  </div>
 
   <footer>
     <p>Copyright 2011 yannick weiss</p>
